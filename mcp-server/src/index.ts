@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import { randomUUID } from "node:crypto";
 import { evaluateSafetyRules, type RuleHit, type RiskLevel } from "./rules.js";
 
 const server = new McpServer({
@@ -47,7 +48,7 @@ function now() {
 }
 
 function newCaseId() {
-  return `SV-DEMO-${Date.now()}`;
+  return `SV-DEMO-${randomUUID()}`;
 }
 
 function audit(caseRecord: DemoCase, event: AuditEvent["event"], actor: AuditEvent["actor"], detail: string) {
