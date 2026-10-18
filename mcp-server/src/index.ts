@@ -12,7 +12,7 @@ import {
 
 const server = new McpServer({
   name: "safevoice-intelligence",
-  version: "0.3.0",
+  version: "0.4.0",
 });
 
 const demoCases = new Map<string, DemoCase>();

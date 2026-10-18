@@ -168,15 +168,29 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the evolving technical ar
 
 ## Project status
 
-**Early-stage platform build.**
+**Working synthetic demo, not a production safety service.**
 
-The current focus is establishing the product architecture, governance model, multilingual reporting workflow, API contract and MCP surface before connecting production integrations.
+The repository includes a mobile-friendly local web demo and an MCP reference server. The browser demo supports a synthetic English or Yoruba text report, an optional separately stored English rendering, transparent FoodSafe and MedSafe rule signals, immediate human-review queueing, a demo review decision, a recorded follow-up action, verification and a case timeline.
 
-This repository intentionally does not contain real personal, clinical or incident data.
+The demo is designed to make the workflow inspectable. It does not authenticate users, persist cases, accept voice or media, perform automatic translation, contact a real reviewer or connect to an organisation. Do not enter real incident, health, employment or identifying information. It is not an emergency service, medical product or production-ready case-management system.
+
+### Run the local demo
+
+Requirements: Node.js 20 or newer and npm.
+
+```bash
+cd mcp-server
+npm ci
+npm test
+npm run build
+npm run demo:serve
+```
+
+Open `http://127.0.0.1:4173` on the same device. The server binds to localhost and holds cases in memory only. Restarting it clears the synthetic demo cases. The MCP reference server remains available with `npm run dev` for MCP-compatible clients.
 
 ### Verified prototype slice (October 2026)
 
-The MCP reference server has a tested synthetic case workflow. New reports become visible for human review immediately, while missing evidence remains listed as an open question. The prototype blocks decisions before review and verification before action, and records a caller-supplied rationale in its timeline. It does not authenticate reviewer identity, persist cases, store media, or connect to organisations or emergency services. Rule outputs have no calibrated confidence score.
+Automated tests cover the complete synthetic case lifecycle, unsupported language rejection, request-size limits, a decision attempted before review, and the browser page's safety headers. Rule outputs are advisory signals with no calibrated confidence score. Reviewer identity is not authenticated, and the demo does not make real-world decisions or actions.
 
 ## Roadmap
 

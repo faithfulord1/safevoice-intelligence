@@ -18,7 +18,9 @@ Build a multilingual safety-intelligence platform that makes it easier for peopl
 - [x] MCP tool contract
 - [x] synthetic Yoruba MedSafe case
 - [x] initial threat model
-- [ ] runnable MCP scaffold
+- [x] runnable MCP scaffold
+- [x] local mobile-friendly synthetic reporting and review demo
+- [x] end-to-end synthetic report → review → action → verification workflow
 - [ ] public demo recording
 - [ ] project website screenshots
 
@@ -27,6 +29,8 @@ Build a multilingual safety-intelligence platform that makes it easier for peopl
 A developer, safety professional or potential partner can understand the problem, architecture, governance model and integration direction without a private briefing.
 
 ## Phase 1: Reporting MVP
+
+**Current demo boundary:** English and Yoruba typed synthetic text only, with an optional human-entered English rendering. The demo is local, memory-only and unauthenticated. Voice, uploads, real reports, secure persistence and organisational routing remain future work and require governance review before implementation.
 
 ### User experience
 

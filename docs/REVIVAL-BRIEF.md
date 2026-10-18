@@ -1,7 +1,7 @@
 # SafeVoice revival brief
 
-**Status:** early product concept with a tested synthetic MCP workflow  
-**Proposed next step:** connect SafeVoice to Palm92's existing Language Access and Language Assurance work, then run a synthetic evidence sprint  
+**Status:** working local synthetic web demo and MCP workflow; no production deployment  
+**Proposed next step:** validate the workflow and Yoruba-English wording with a qualified reviewer, then scope a secure partner-backed pilot  
 **Funding ask:** not set; costs and eligibility need a delivery partner and funder guidance
 
 ## The opportunity
@@ -14,20 +14,20 @@ SafeVoice is the **Language Application** layer of Palm92's existing three-part 
 
 ## First use case to validate
 
-Start with one synthetic Yoruba-English food-safety report, with a human-prepared transcript and a separate translation record. Food-safety and community organisations in Nigeria or the UK are later partner candidates only; no partner or endorsement is confirmed. The first build must not imply language coverage or translation quality from one example.
+Start with synthetic Yoruba-English medicine and food-safety reports. The local web demo preserves original wording and stores an optional English rendering separately. Food-safety and community organisations in Nigeria or the UK are later partner candidates only; no partner or endorsement is confirmed. A successful smoke test does not establish language coverage or translation quality.
 
 Use simulated scenarios first. Do not collect live reports, health details, whistleblowing disclosures or identifiable media during the prototype stage.
 
 ## Smallest useful service
 
-1. Accept a text report or a human-prepared transcript, with the original wording preserved.
+1. Accept a typed English or Yoruba example, with the original wording preserved.
 2. Keep any translation separate and label who prepared or checked it.
 3. Use the existing VoiceGuard approach to check language identification, meaning preservation, names, dates and uncertainty before relying on a derived transcript or translation.
 4. Show the relevant SafeVoice rule signal and open evidence questions without asserting a diagnosis or regulatory finding.
 5. Put every case in a human-review queue immediately, even when evidence is incomplete.
 6. Record review rationale, action and follow-up verification as separate timeline events.
 
-Voice upload, automated transcription, translation, photo/video storage, regulator routing, identity management and live organisational integrations are outside the first simulated pilot.
+Voice upload, automated transcription, automatic translation, photo/video storage, regulator routing, identity management and live organisational integrations are outside the current demo.
 
 ## 30-day evidence sprint
 
@@ -60,7 +60,7 @@ Reviewer availability, sample size, participation counts and timing targets rema
 - Do not show a numeric confidence score until the rules or models have been evaluated on an appropriate dataset.
 - Treat translation as derived evidence and request qualified review where meaning is uncertain.
 - Require qualified human review for any real safety interpretation or consequential action.
-- The current MCP demo has no authentication, persistent storage, media upload, tenant isolation or external routing. Do not connect it to real cases.
+- The current web and MCP demos have no authentication, durable storage, media upload, tenant isolation or external routing. Do not connect them to real cases.
 - Seek a data-protection and safeguarding review before any move beyond synthetic exercises.
 
 ## Open questions for a partner

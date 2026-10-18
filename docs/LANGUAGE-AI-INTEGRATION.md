@@ -7,9 +7,9 @@
 
 | Layer | Existing Palm92 work | Role in SafeVoice | Current evidence |
 | --- | --- | --- | --- |
-| Language Access | `language-access` | Receive text or a human-prepared transcript; preserve the original wording; show a separate translation and plain-language response | SafeVoice demo accepts original text and an optional derived translation in memory |
+| Language Access | `language-access` | Receive text or a human-prepared transcript; preserve the original wording; show a separate translation and plain-language response | SafeVoice web demo accepts English or Yoruba text and an optional derived translation in memory |
 | Language Assurance | `language-assurance` / VoiceGuard | Evaluate language identification, meaning, names, dates, numbers, code-switching, pronunciation and unsafe outputs; record uncertainty and escalation | No VoiceGuard benchmark is integrated yet; no language performance claims |
-| Language Application | `language-application` / SafeVoice | Apply the reviewed language workflow to a safety-report case, evidence questions and human-governed timeline | SafeVoice v0.3 synthetic MCP workflow; no live reports |
+| Language Application | `language-application` / SafeVoice | Apply the reviewed language workflow to a safety-report case, evidence questions and human-governed timeline | SafeVoice v0.4 local synthetic web and MCP demos; no live reports |
 
 The product flow is:
 
@@ -29,7 +29,7 @@ Human decision, action and verification recorded separately
 
 ## First controlled test
 
-Use one synthetic Yoruba-English food-safety scenario already represented in the SafeVoice demo materials. Keep the original Yoruba statement unchanged, label any English wording as a derived translation, and record who reviewed it. A qualified Yoruba reviewer must check intended meaning before any translation result is described as validated. A single example is only a workflow smoke test, not a language benchmark.
+Use synthetic Yoruba-English food-safety and medicine-safety scenarios. The web demo keeps original Yoruba wording unchanged and labels any English wording as a separate, unverified rendering. A qualified Yoruba reviewer must check intended meaning before any translation result is described as validated. A single example is only a workflow smoke test, not a language benchmark.
 
 For the first sprint, use text and human-prepared transcripts. Do not collect live voice, photo or video reports. Add automated ASR, TTS or translation only after a documented comparison shows a clear benefit, data terms are reviewed, and failure handling is tested. N-ATLAS, CommonLingua and other providers are candidate components, not current dependencies or verified integrations.
 
