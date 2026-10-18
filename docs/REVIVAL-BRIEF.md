@@ -1,7 +1,7 @@
 # SafeVoice revival brief
 
 **Status:** early product concept with a tested synthetic MCP workflow  
-**Proposed next step:** partner discovery and a simulated pilot  
+**Proposed next step:** connect SafeVoice to Palm92's existing Language Access and Language Assurance work, then run a synthetic evidence sprint  
 **Funding ask:** not set; costs and eligibility need a delivery partner and funder guidance
 
 ## The opportunity
@@ -10,9 +10,11 @@ SafeVoice can make safety reporting easier for people who are more comfortable s
 
 The Prompt2Voice account review highlighted a useful product lesson: a broad promise of voice, image and video generation is not enough to establish trust or operational value. SafeVoice should use voice and media as accessible ways to submit evidence, then make provenance, uncertainty, human review and follow-up visible. This is an independent product direction; it does not rely on Prompt2Voice or its API.
 
-## First group to validate
+SafeVoice is the **Language Application** layer of Palm92's existing three-part Nigeria Language AI initiative. **Language Access** handles the person's input and understandable response; **Language Assurance / VoiceGuard** checks whether language systems preserve meaning and escalate uncertainty; **SafeVoice** applies those capabilities to a safety-report workflow. Reuse those assets instead of starting another disconnected language app.
 
-Start discovery with one UK community food organisation, food bank or small hospitality operator that receives safety concerns from multilingual staff or service users. These are candidate settings only; no partner or endorsement is confirmed.
+## First use case to validate
+
+Start with one synthetic Yoruba-English food-safety report, with a human-prepared transcript and a separate translation record. Food-safety and community organisations in Nigeria or the UK are later partner candidates only; no partner or endorsement is confirmed. The first build must not imply language coverage or translation quality from one example.
 
 Use simulated scenarios first. Do not collect live reports, health details, whistleblowing disclosures or identifiable media during the prototype stage.
 
@@ -20,23 +22,24 @@ Use simulated scenarios first. Do not collect live reports, health details, whis
 
 1. Accept a text report or a human-prepared transcript, with the original wording preserved.
 2. Keep any translation separate and label who prepared or checked it.
-3. Show the relevant rule signal, open evidence questions and uncertainty without asserting a diagnosis or regulatory finding.
-4. Put every case in a human-review queue immediately, even when evidence is incomplete.
-5. Record review rationale, action and follow-up verification as separate timeline events.
-6. Give the reporter a plain-language status and a clear emergency boundary.
+3. Use the existing VoiceGuard approach to check language identification, meaning preservation, names, dates and uncertainty before relying on a derived transcript or translation.
+4. Show the relevant SafeVoice rule signal and open evidence questions without asserting a diagnosis or regulatory finding.
+5. Put every case in a human-review queue immediately, even when evidence is incomplete.
+6. Record review rationale, action and follow-up verification as separate timeline events.
 
 Voice upload, automated transcription, translation, photo/video storage, regulator routing, identity management and live organisational integrations are outside the first simulated pilot.
 
-## 6-week discovery and simulation pilot
+## 30-day evidence sprint
 
-| Weeks | Work | Evidence produced |
+| Days | Work | Evidence produced |
 | --- | --- | --- |
-| 1–2 | Interview one delivery partner and 5–8 frontline users; map the existing reporting route | Current-state map, accessibility needs, baseline response steps |
-| 3 | Agree synthetic scenarios, permissions, retention and escalation boundary | Scenario pack, data-flow map, review checklist |
-| 4–5 | Run tabletop exercises using synthetic English and Yoruba text cases | Completion, review timing, translation corrections, missed/unclear fields |
-| 6 | Review results with the partner and decide whether to stop, revise or scope a controlled live pilot | Findings, risks, costed next-stage scope |
+| Days 1–3 | Freeze one SafeVoice journey and claims; map original-language, derived-language and audit fields | Architecture, data-flow map, synthetic test plan |
+| Days 4–10 | Build a text-first demonstration around the existing synthetic workflow | Working Yoruba-English scenario, immediate review state and timeline |
+| Days 11–17 | Prepare a small consented or synthetic language test set with a qualified Yoruba reviewer | VoiceGuard rubric, provenance and issue log; no public score yet |
+| Days 18–24 | Run the same cases through the language workflow and SafeVoice review gate | Errors, corrections, missing evidence, blocked transitions |
+| Days 25–30 | Decide whether to continue, change use case or stop; cost any next phase with a real partner | Evidence summary, risks, partner questions, next-stage scope |
 
-Participation counts and timing targets should be agreed with the partner before the pilot; they are not yet confirmed.
+Reviewer availability, sample size, participation counts and timing targets remain to be agreed; they are not confirmed.
 
 ## Measures to agree before testing
 
@@ -46,6 +49,7 @@ Participation counts and timing targets should be agreed with the partner before
 - number and type of reviewer corrections to the structured summary;
 - number of required questions that the intake fails to collect;
 - user-reported clarity and accessibility;
+- proportion of language cases where a qualified reviewer confirms or corrects the intended meaning;
 - correct blocking of a decision made before review or verification made before action;
 - privacy or safeguarding incidents (target: zero in a synthetic exercise).
 
@@ -67,6 +71,12 @@ Participation counts and timing targets should be agreed with the partner before
 4. What evidence is necessary, and what should never be collected at intake?
 5. What systems, retention rules and incident procedures must an integration respect?
 
+## Near-term ecosystem opportunities
+
+- **UNDP AI Diffusion Jobs and Tools Programme:** its partner/advisor expression of interest closes **30 October 2026**. It is a non-financial collaboration call, not a grant or procurement route. A draft contribution could describe Palm92's early-stage language assurance and SafeVoice application work without claiming validated deployments. Any submission needs Faith's review and approval. [Official call](https://www.undp.org/digital-innovation/ai-diffusion-workforce-and-tools-accelerator).
+- **ATLAS Umoja AI / GSMA:** non-members can register interest and complete a participation agreement. Treat this as a collaboration route to explore, not a confirmed partnership or guaranteed access. [Official project page](https://www.gsma.com/get-involved/gsma-foundry/the-african-ai-languages-model-project/).
+- **N-ATLAS National AI Innovation Challenge 2026:** the 12 October 2026 deadline has passed. Its published eligibility also requires Nigerian citizens or registered Nigerian entities. Do not prepare a late application or assume eligibility for a future cycle. [Official challenge page](https://ncair.nitda.gov.ng/naic/).
+
 ## Decision gate
 
-Proceed to a live-data design only if a named partner confirms the problem, an authorised review route, participant protections, the lawful data-handling basis, security requirements and an affordable implementation path. Otherwise keep the project synthetic, change the use case or stop.
+Proceed to a live-data design only if a named partner confirms the problem, an authorised review route, a qualified language reviewer, participant protections, the lawful data-handling basis, security requirements and an affordable implementation path. Otherwise keep the project synthetic, change the use case or stop.

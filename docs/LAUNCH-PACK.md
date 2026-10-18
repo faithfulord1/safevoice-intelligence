@@ -80,7 +80,7 @@ Show:
 - domain suggestion
 - priority
 - evidence request
-- confidence / uncertainty
+- uncertainty and evidence (numeric confidence only if calibrated)
 
 ### 0:48 to 1:05 | Human control
 

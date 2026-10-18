@@ -131,7 +131,8 @@ Suggested fields:
 - extracted_claims
 - missing_information
 - translation
-- ai_confidence
+- rule_signals and uncertainty notes
+- optional calibrated_confidence_ref, only after validation for the intended language and task
 - human_validation_state
 
 ### RiskAssessment

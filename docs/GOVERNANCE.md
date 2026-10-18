@@ -17,7 +17,7 @@ AI may support:
 - summarisation
 - structured fact extraction
 - categorisation
-- confidence scoring
+- uncertainty indicators; calibrated confidence only after evaluation
 - missing-information detection
 - policy retrieval
 - routing suggestions
@@ -62,7 +62,7 @@ The reviewer should be able to see:
 - the original report
 - translation, if used
 - extracted claims
-- model confidence
+- model confidence only where calibrated and evidenced; otherwise visible uncertainty
 - rule hits
 - policy references
 - missing information
@@ -100,7 +100,7 @@ The system should preserve:
 4. structured interpretation,
 5. human-reviewed interpretation where required.
 
-When confidence is low or ambiguity could change the safety outcome, SafeVoice should request clarification or qualified human-language review rather than silently choosing an interpretation.
+When uncertainty is material or ambiguity could change the safety outcome, SafeVoice should request clarification or qualified human-language review rather than silently choosing an interpretation. Do not display numeric confidence until it has been calibrated and evaluated for the intended language, task and user group.
 
 ## Risk-tier governance
 

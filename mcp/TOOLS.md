@@ -55,7 +55,8 @@ Inputs:
 Returns:
 
 - translation
-- confidence
+- uncertainty / ambiguity flags
+- calibrated confidence reference, if available and validated
 - ambiguity_flags
 - original_evidence_ref
 
@@ -76,7 +77,8 @@ Returns:
 - extracted_claims
 - missing_information
 - proposed_severity
-- confidence
+- matched rule signals and rationale
+- uncertainty / missing-information notes
 - human_validation_required
 
 Side effect: may create a draft classification, not a final human decision.

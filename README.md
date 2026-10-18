@@ -66,7 +66,7 @@ The intended evidence model keeps:
 2. the original-language transcript,
 3. the translated version,
 4. structured facts extracted from the report,
-5. confidence and uncertainty indicators,
+5. uncertainty and evidence indicators; calibrated confidence only after evaluation,
 6. the human-reviewed interpretation used for action.
 
 Early language priorities include English, Yoruba, Hausa, Igbo, French, Arabic, Hindi, Urdu and Polish, with expansion based on community and partner needs.
@@ -93,7 +93,7 @@ Location and organisation
 Domain and issue type
 Risk level
 Evidence attachments
-AI classification and confidence
+AI classification, source and uncertainty
 Applicable policy or rule references
 Recommended action
 Human reviewer
