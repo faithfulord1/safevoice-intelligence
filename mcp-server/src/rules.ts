@@ -150,9 +150,10 @@ export function evaluateSafetyRules(statement: string) {
       overallRisk: "medium" as RiskLevel,
       primaryDomain: "unclassified" as const,
       humanReviewRequired: true,
-      confidence: 0.4,
+      ruleSignal: "unclassified" as const,
+      confidence: null,
       explanation:
-        "No deterministic demo rule matched. The report remains queued for human review rather than being treated as safe.",
+        "No deterministic demo rule matched. The report remains queued for human review rather than being treated as safe. No calibrated confidence score is available.",
     };
   }
 
@@ -163,8 +164,9 @@ export function evaluateSafetyRules(statement: string) {
     overallRisk: highest.risk,
     primaryDomain: highest.domain,
     humanReviewRequired: true,
-    confidence: 0.9,
+    ruleSignal: "deterministic_match" as const,
+    confidence: null,
     explanation:
-      "One or more transparent demo rules matched. Rule hits are safety signals only and require authorised human interpretation.",
+      "One or more transparent demo rules matched. Rule hits are safety signals only and require human interpretation. No calibrated confidence score is available.",
   };
 }

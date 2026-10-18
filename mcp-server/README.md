@@ -16,11 +16,11 @@ Returns the current state of an in-memory synthetic case.
 
 ### `classify_safety_report`
 
-Provides a basic non-clinical classification suggestion with a visible confidence value.
+Provides basic non-clinical classification suggestions. The demo exposes a rule-signal label, not a numeric confidence score: the rules have not been calibrated against a representative dataset.
 
 ### `request_human_review`
 
-Queues the synthetic case for an authorised human decision.
+Starts review of a synthetic case. The prototype does not authenticate reviewer identity.
 
 ## Deliberately absent tools
 
@@ -60,6 +60,17 @@ npm run dev
 
 The server currently uses the MCP stdio transport and stores demo cases only in process memory. Restarting it clears the cases.
 
+## Review workflow hardening
+
+New cases enter `awaiting_human_review` immediately. Evidence requests are shown as open questions and do not block triage. The demo state machine requires review to start before a decision can be recorded, and requires an action before verification. Decision rationale is retained in the demo audit timeline. These are workflow checks, not production access controls. Demo human events are caller supplied, not authenticated.
+
+Run unit tests and compile the MCP server:
+
+```bash
+npm test
+npm run build
+```
+
 ## Example synthetic report
 
 ```json
@@ -97,6 +108,7 @@ Before this can become a production MCP service, SafeVoice needs:
 - security testing
 - jurisdiction-specific regulatory validation
 - remote MCP transport and deployment design
+- calibration and evaluation before any confidence score is presented
 
 ## MCP publication direction
 

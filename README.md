@@ -174,6 +174,10 @@ The current focus is establishing the product architecture, governance model, mu
 
 This repository intentionally does not contain real personal, clinical or incident data.
 
+### Verified prototype slice (October 2026)
+
+The MCP reference server has a tested synthetic case workflow. New reports become visible for human review immediately, while missing evidence remains listed as an open question. The prototype blocks decisions before review and verification before action, and records a caller-supplied rationale in its timeline. It does not authenticate reviewer identity, persist cases, store media, or connect to organisations or emergency services. Rule outputs have no calibrated confidence score.
+
 ## Roadmap
 
 ### Phase 1: Foundation
