@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <title>SafeVoice | Synthetic safety report demo</title>
+  <style>
+    :root{color-scheme:light;--ink:#17251f;--muted:#61716a;--line:#dce4dd;--green:#0c6a4c;--pale:#edf5ef;--gold:#f2c66d;--paper:#fff;--bg:#f7f5f0;--red:#a53f35;font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:4px 0 24px}.brand{display:flex;align-items:center;gap:12px}.mark{display:grid;place-items:center;width:44px;height:44px;background:var(--green);color:white;border-radius:14px;font-weight:800;letter-spacing:-2px}.brand h1{font-size:20px;margin:0}.brand p{margin:0;color:var(--muted);font-size:13px}.demo-tag{border:1px solid #e7cf98;border-radius:999px;background:#fff8e6;color:#644a12;padding:7px 12px;font-size:12px;font-weight:700;white-space:nowrap}.notice{border:1px solid #e8d8ad;border-left:5px solid var(--gold);background:#fff9e9;padding:14px 16px;border-radius:12px;margin-bottom:20px}.notice strong{display:block;margin-bottom:2px}.notice p{margin:0;color:#655631;font-size:14px}.layout{display:grid;grid-template-columns:minmax(290px,390px) 1fr;gap:20px;align-items:start}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 28px #192a1c0a}.card h2{font-size:18px;margin:0 0 4px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}.field{margin:14px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.field small{display:block;color:var(--muted);font-size:12px;margin-top:5px}.field input,.field select,.field textarea{width:100%;border:1px solid #becbc1;border-radius:10px;padding:11px 12px;background:white;color:var(--ink)}.field textarea{min-height:110px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus,button:focus-visible{outline:3px solid #84c9a9;outline-offset:2px}.btn{border:0;border-radius:10px;background:var(--green);color:white;font-weight:700;padding:11px 15px}.btn:hover{background:#07583e}.btn.secondary{background:#eaf2ec;color:var(--green)}.btn.ghost{background:white;color:var(--green);border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.examples{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 16px}.example{font-size:12px;border:1px solid var(--line);border-radius:999px;background:white;padding:7px 10px;color:var(--green)}.queue-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.count{border-radius:999px;background:var(--pale);color:var(--green);font-size:12px;font-weight:700;padding:5px 10px}.queue{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:16px}.case-card{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:13px;background:white;padding:13px;color:var(--ink)}.case-card.selected{border:2px solid var(--green);padding:12px}.case-card strong,.case-card span{display:block}.case-card .preview{font-size:13px;color:var(--muted);margin:6px 0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:var(--muted)}.pill{display:inline-flex;border-radius:999px;padding:3px 8px;background:#eef1ef;color:#45554b;font-weight:700;font-size:11px}.pill.high,.pill.critical{background:#fff0eb;color:#993c2c}.pill.medium{background:#fff7df;color:#765800}.detail-empty{border:1px dashed #b7c5bb;border-radius:14px;padding:28px;text-align:center;color:var(--muted)}.detail h3{font-size:20px;margin:0 0 4px;overflow-wrap:anywhere}.detail-top{display:flex;justify-content:space-between;align-items:start;gap:14px}.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.fact{background:#f7f9f7;border-radius:11px;padding:11px}.fact small{display:block;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.fact p{margin:3px 0 0;font-size:14px;overflow-wrap:anywhere}.quote{border-left:3px solid #91bea4;padding:10px 13px;background:#f7faf7;border-radius:0 10px 10px 0;white-space:pre-wrap;overflow-wrap:anywhere}.section{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}.section h4{font-size:14px;margin:0 0 9px}.rule{border:1px solid var(--line);border-radius:11px;padding:12px;margin:8px 0}.rule p{font-size:13px;color:var(--muted);margin:5px 0}.list{padding-left:20px;margin:8px 0;color:#38483e;font-size:13px}.timeline{list-style:none;padding:0;margin:0}.timeline li{border-left:2px solid #c8d8cb;margin-left:7px;padding:0 0 14px 14px;position:relative}.timeline li:before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%;position:absolute;left:-5px;top:6px}.timeline strong{font-size:13px}.timeline time{display:block;color:var(--muted);font-size:11px}.timeline p{font-size:13px;margin:3px 0 0;overflow-wrap:anywhere}.workflow{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}.workflow h4{margin:0 0 8px}.workflow .field{margin:9px 0}.message{padding:10px 12px;border-radius:10px;background:var(--pale);color:var(--green);font-size:13px;margin:10px 0}.message.error{background:#fff0eb;color:var(--red)}.footer{color:var(--muted);font-size:12px;margin:22px 2px 10px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:800px){.wrap{padding:14px}.layout{grid-template-columns:1fr}.top{margin-bottom:18px}.card{padding:16px}.queue{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.demo-tag{font-size:10px;padding:6px 8px}.brand h1{font-size:18px}.queue{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.detail-top{display:block}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand"><div class="mark" aria-hidden="true">SV</div><div><h1>SafeVoice</h1><p>Speak up. Stay protected. Get the right action.</p></div></div>
+      <span class="demo-tag">SYNTHETIC DEMO ONLY</span>
+    </header>
+    <section class="notice" aria-label="Demo safety notice">
+      <strong>Use fictional examples only</strong>
+      <p>This local prototype is not monitored and cannot contact emergency services, a pharmacy, an employer or a regulator. Do not enter real names, health details, incidents or contact information. For an immediate danger, use the appropriate local emergency route.</p>
+    </section>
+    <div class="layout">
+      <section class="card" aria-labelledby="report-title">
+        <h2 id="report-title">Create a demo report</h2>
+        <p class="sub">The original wording is preserved. Any translation is a separate, human-entered demo field.</p>
+        <div class="examples" aria-label="Synthetic examples">
+          <button class="example" type="button" data-example="yo">Yoruba medicine example</button>
+          <button class="example" type="button" data-example="en">English food example</button>
+        </div>
+        <form id="report-form">
+          <div class="field"><label for="language">Report language</label><select id="language" name="sourceLanguage" required><option value="yo">Yoruba</option><option value="en">English</option></select></div>
+          <div class="field"><label for="original">Original report</label><textarea id="original" name="originalStatement" minlength="5" maxlength="4000" required placeholder="Enter a fictional example only"></textarea><small>Do not include personal details. This demo does not record voice or upload photos/video.</small></div>
+          <div class="field"><label for="translation">English rendering (optional)</label><textarea id="translation" name="translatedStatement" maxlength="4000" placeholder="A separate draft translation, if available"></textarea><small>Not automatically translated or independently verified.</small></div>
+          <button class="btn" id="submit-report" type="submit">Submit synthetic report</button>
+        </form>
+        <div id="form-message" role="status" aria-live="polite"></div>
+      </section>
+      <section class="card" aria-labelledby="queue-title">
+        <div class="queue-head"><div><h2 id="queue-title">Human review queue</h2><p class="sub">Every report is queued. Rule matches are prompts for review, not decisions.</p></div><span id="case-count" class="count">0 cases</span></div>
+        <div id="queue" class="queue" aria-label="Demo cases"></div>
+        <div id="detail" class="detail"><div class="detail-empty">Submit a fictional report or choose a synthetic example to see its case record and timeline.</div></div>
+      </section>
+    </div>
+    <p class="footer">Prototype boundaries: no accounts, role authentication, durable storage, media upload, automatic translation, live policy database, external routing or production security. Cases disappear when the demo server restarts. The review controls below simulate caller-provided actions and do not verify who performed them.</p>
+  </main>
+  <script>
+    const state = { cases: [], selected: null };
+    const $ = (selector) => document.querySelector(selector);
+    const escText = (value) => String(value ?? "");
+    function node(tag, text, className) { const element = document.createElement(tag); if (text !== undefined) element.textContent = escText(text); if (className) element.className = className; return element; }
+    async function api(path, options = {}) {
+      const response = await fetch(path, { ...options, headers: { "content-type": "application/json", ...(options.headers || {}) } });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "The request could not be completed.");
+      return result;
+    }
+    function statusText(status) { return ({ awaiting_human_review: "Awaiting review", under_review: "Under review", action_recorded: "Action recorded", verified: "Verified in demo" })[status] || status; }
+    function short(value, max = 76) { const text = escText(value); return text.length > max ? text.slice(0, max - 1) + "…" : text; }
+    function showMessage(text, error = false) { const box = $("#form-message"); box.replaceChildren(); if (text) box.append(node("div", text, `message${error ? " error" : ""}`)); }
+    function renderQueue() {
+      const queue = $("#queue"); queue.replaceChildren();
+      $("#case-count").textContent = `${state.cases.length} ${state.cases.length === 1 ? "case" : "cases"}`;
+      if (!state.cases.length) { queue.append(node("div", "No reports yet. The demo examples above are fictional.", "detail-empty")); return; }
+      for (const item of [...state.cases].reverse()) {
+        const button = node("button", undefined, `case-card${item.caseId === state.selected ? " selected" : ""}`); button.type = "button"; button.setAttribute("aria-pressed", String(item.caseId === state.selected));
+        button.append(node("strong", item.caseId)); button.append(node("span", short(item.originalStatement), "preview"));
+        const meta = node("span", undefined, "meta"); meta.append(node("span", statusText(item.status))); meta.append(node("span", item.priority.toUpperCase(), `pill ${item.priority}`)); button.append(meta);
+        button.addEventListener("click", () => { state.selected = item.caseId; renderQueue(); renderDetail(item); }); queue.append(button);
+      }
+    }
+    function field(labelText, value, tag = "p", className = "") {
+      const wrap = node("div", undefined, "fact"); wrap.append(node("small", labelText)); wrap.append(node(tag, value, className)); return wrap;
+    }
+    function button(label, action, secondary = false) { const b = node("button", label, `btn${secondary ? " secondary" : ""}`); b.type = "button"; b.addEventListener("click", action); return b; }
+    function inputField(labelText, name, placeholder, multiline = false) {
+      const wrap = node("div", undefined, "field"); const id = `field-${name}`; const label = node("label", labelText); label.htmlFor = id;
+      const input = node(multiline ? "textarea" : "input"); input.id = id; input.name = name; input.required = true; input.placeholder = placeholder; input.maxLength = 1000; wrap.append(label, input); return [wrap, input];
+    }
+    function renderDetail(item) {
+      const detail = $("#detail"); detail.replaceChildren();
+      const head = node("div", undefined, "detail-top"); const title = node("div"); title.append(node("h3", item.caseId)); title.append(node("p", statusText(item.status), "sub")); head.append(title, node("span", `${item.priority.toUpperCase()} signal`, `pill ${item.priority}`)); detail.append(head);
+      const facts = node("div", undefined, "facts"); facts.append(field("Language", item.sourceLanguage === "yo" ? "Yoruba" : "English")); facts.append(field("Demo category", item.domain.replaceAll("_", " "))); facts.append(field("Issue signal", item.issueType.replaceAll("_", " "))); facts.append(field("Human review", "Required for every report")); detail.append(facts);
+      const original = node("section", undefined, "section"); original.append(node("h4", "Original wording"), node("div", item.originalStatement, "quote")); detail.append(original);
+      if (item.translatedStatement) { const translated = node("section", undefined, "section"); translated.append(node("h4", "Separate English rendering, unverified"), node("div", item.translatedStatement, "quote")); detail.append(translated); }
+      const rules = node("section", undefined, "section"); rules.append(node("h4", `Rule signals (${item.ruleHits.length})`));
+      if (!item.ruleHits.length) rules.append(node("p", "No demo rule matched. This does not mean the report is safe; it stays in the human review queue.", "sub"));
+      for (const hit of item.ruleHits) { const card = node("div", undefined, "rule"); card.append(node("strong", hit.title), node("p", hit.explanation)); card.append(node("p", `Suggested next step: ${hit.recommendedNextStep}`)); const ul = node("ul", undefined, "list"); for (const request of hit.evidenceRequests) ul.append(node("li", request)); card.append(ul); rules.append(card); }
+      detail.append(rules);
+      const controls = node("section", undefined, "section"); controls.append(node("h4", "Demo reviewer controls"), node("p", "These controls demonstrate the workflow only. Reviewer identity is not authenticated.", "sub"));
+      if (item.status === "awaiting_human_review") { const form = node("div", undefined, "workflow"); form.append(node("h4", "1. Start a review")); const [wrap, input] = inputField("Review note", "reason", "For example: inspect the synthetic report"); form.append(wrap); form.append(button("Start human review", async () => { try { await mutate(item.caseId, "review", { reason: input.value }); } catch (e) { showMessage(e.message, true); } })); controls.append(form); }
+      if (item.status === "under_review") { const form = node("div", undefined, "workflow"); form.append(node("h4", "2. Record a decision and proposed action")); const [dWrap, decision] = inputField("Review outcome", "decision", "For example: request qualified review"); const [aWrap, action] = inputField("Proposed corrective action", "correctiveAction", "Describe a fictional follow-up"); const [rWrap, rationale] = inputField("Reasoning", "rationale", "Explain the demo review rationale", true); form.append(dWrap, aWrap, rWrap); form.append(button("Record demo action", async () => { try { await mutate(item.caseId, "decision", { decision: decision.value, correctiveAction: action.value, rationale: rationale.value }); } catch (e) { showMessage(e.message, true); } })); controls.append(form); }
+      if (item.status === "action_recorded") { const form = node("div", undefined, "workflow"); form.append(node("h4", "3. Record fictional verification")); const [vWrap, verification] = inputField("Verification note", "verification", "Describe evidence checked in this fictional example", true); form.append(vWrap); form.append(button("Record demo verification", async () => { try { await mutate(item.caseId, "verification", { verification: verification.value }); } catch (e) { showMessage(e.message, true); } })); controls.append(form); }
+      if (item.status === "verified") controls.append(node("div", "Demo lifecycle complete. This entry is not evidence of a real-world safety action.", "message"));
+      detail.append(controls);
+      const timeline = node("section", undefined, "section"); timeline.append(node("h4", "Case timeline")); const list = node("ol", undefined, "timeline");
+      for (const event of item.audit) { const li = node("li"); const top = node("strong", event.event.replaceAll("_", " ")); const time = node("time", new Date(event.at).toLocaleString()); li.append(top, time, node("p", event.detail)); list.append(li); }
+      timeline.append(list); detail.append(timeline);
+    }
+    async function mutate(caseId, action, data) {
+      const result = await api(`/api/cases/${encodeURIComponent(caseId)}/${action}`, { method: "POST", body: JSON.stringify(data) });
+      upsert(result.case); state.selected = caseId; renderQueue(); renderDetail(result.case); showMessage("Demo case updated. No external action was taken.");
+    }
+    function upsert(item) { const index = state.cases.findIndex((record) => record.caseId === item.caseId); if (index < 0) state.cases.push(item); else state.cases[index] = item; }
+    async function refresh() { const result = await api("/api/cases"); state.cases = result.cases; renderQueue(); const selected = state.cases.find((item) => item.caseId === state.selected); if (selected) renderDetail(selected); }
+    $("#report-form").addEventListener("submit", async (event) => {
+      event.preventDefault(); const submit = $("#submit-report"); submit.disabled = true; showMessage("");
+      const data = Object.fromEntries(new FormData(event.currentTarget));
+      try { const result = await api("/api/cases", { method: "POST", body: JSON.stringify(data) }); upsert(result.case); state.selected = result.case.caseId; event.currentTarget.reset(); $("#language").value = "yo"; renderQueue(); renderDetail(result.case); showMessage("Synthetic report created and added to human review. No notification was sent."); }
+      catch (error) { showMessage(error.message, true); }
+      finally { submit.disabled = false; }
+    });
+    document.querySelectorAll("[data-example]").forEach((control) => control.addEventListener("click", () => {
+      if (control.dataset.example === "yo") { $("#language").value = "yo"; $("#original").value = "Oogun ti won fun mi yii dabi eni pe ojo re ti koja."; $("#translation").value = "This medicine appears to be past its expiry date."; }
+      else { $("#language").value = "en"; $("#original").value = "In this fictional example, a meal may contain peanuts, and a guest has a peanut allergy."; $("#translation").value = ""; }
+      $("#original").focus(); showMessage("Synthetic example loaded. Review it before submitting.");
+    }));
+    refresh().catch((error) => showMessage(`Could not connect to the local demo server: ${error.message}`, true));
+  </script>
+</body>
+</html>

@@ -2,9 +2,9 @@
 
 **Speak up. Stay protected. Get the right action.**
 
-SafeVoice Intelligence is a multilingual, human-governed safety intelligence platform for turning real-world safety concerns into structured, traceable action.
+SafeVoice Intelligence is an early-stage project for making safety reporting more accessible and keeping the path from report to human review traceable.
 
-A person can report a concern by voice, text, photo, video, QR code or assisted channel in the language that is most natural to them. SafeVoice preserves the original evidence, helps structure and classify the concern, routes it to the right workflow, starts escalation timers, supports authorised human review, and maintains an auditable evidence trail from first report to verified resolution.
+The current demo accepts fictional typed reports in English or Yoruba. Voice, photos, video, QR reporting, automated language services, secure case storage and live organisational routing are future product work and are not implemented in this version.
 
 > **AI understands. AI recommends. Humans decide. Every action is accountable.**
 
@@ -66,7 +66,7 @@ The intended evidence model keeps:
 2. the original-language transcript,
 3. the translated version,
 4. structured facts extracted from the report,
-5. confidence and uncertainty indicators,
+5. uncertainty and evidence indicators; calibrated confidence only after evaluation,
 6. the human-reviewed interpretation used for action.
 
 Early language priorities include English, Yoruba, Hausa, Igbo, French, Arabic, Hindi, Urdu and Polish, with expansion based on community and partner needs.
@@ -93,7 +93,7 @@ Location and organisation
 Domain and issue type
 Risk level
 Evidence attachments
-AI classification and confidence
+AI classification, source and uncertainty
 Applicable policy or rule references
 Recommended action
 Human reviewer
@@ -168,11 +168,29 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the evolving technical ar
 
 ## Project status
 
-**Early-stage platform build.**
+**Working synthetic demo, not a production safety service.**
 
-The current focus is establishing the product architecture, governance model, multilingual reporting workflow, API contract and MCP surface before connecting production integrations.
+The repository includes a mobile-friendly local web demo and an MCP reference server. The browser demo supports a synthetic English or Yoruba text report, an optional separately stored English rendering, transparent FoodSafe and MedSafe rule signals, immediate human-review queueing, a demo review decision, a recorded follow-up action, verification and a case timeline.
 
-This repository intentionally does not contain real personal, clinical or incident data.
+The demo is designed to make the workflow inspectable. It does not authenticate users, persist cases, accept voice or media, perform automatic translation, contact a real reviewer or connect to an organisation. Do not enter real incident, health, employment or identifying information. It is not an emergency service, medical product or production-ready case-management system.
+
+### Run the local demo
+
+Requirements: Node.js 20 or newer and npm.
+
+```bash
+cd mcp-server
+npm ci
+npm test
+npm run build
+npm run demo:serve
+```
+
+Open `http://127.0.0.1:4173` on the same device. The server binds to localhost and holds cases in memory only. Restarting it clears the synthetic demo cases. The MCP reference server remains available with `npm run dev` for MCP-compatible clients.
+
+### Verified prototype slice (October 2026)
+
+Automated tests cover the complete synthetic case lifecycle, unsupported language rejection, request-size limits, a decision attempted before review, and the browser page's safety headers. Rule outputs are advisory signals with no calibrated confidence score. Reviewer identity is not authenticated, and the demo does not make real-world decisions or actions.
 
 ## Roadmap
 

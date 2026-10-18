@@ -1,65 +1,27 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { randomUUID } from "node:crypto";
-import { evaluateSafetyRules, type RuleHit, type RiskLevel } from "./rules.js";
+import { evaluateSafetyRules } from "./rules.js";
+import {
+  beginDemoHumanReview,
+  createDemoCase,
+  recordDemoHumanDecision,
+  verifyDemoCorrectiveAction,
+  type DemoCase,
+} from "./workflow.js";
 
 const server = new McpServer({
   name: "safevoice-intelligence",
-  version: "0.2.0",
+  version: "0.4.0",
 });
 
-type AuditEvent = {
-  at: string;
-  event: string;
-  actor: "reporter" | "safevoice" | "authorised_human";
-  detail: string;
-};
-
-type DemoCase = {
-  caseId: string;
-  sourceLanguage: string;
-  originalStatement: string;
-  translatedStatement?: string;
-  domain: string;
-  issueType: string;
-  priority: RiskLevel;
-  status:
-    | "received"
-    | "awaiting_evidence"
-    | "awaiting_human_review"
-    | "under_review"
-    | "action_recorded"
-    | "verified"
-    | "resolved";
-  humanReviewRequired: boolean;
-  ruleHits: RuleHit[];
-  evidenceRequests: string[];
-  humanDecision?: string;
-  correctiveAction?: string;
-  verification?: string;
-  audit: AuditEvent[];
-};
-
 const demoCases = new Map<string, DemoCase>();
-
-function now() {
-  return new Date().toISOString();
-}
-
-function newCaseId() {
-  return `SV-DEMO-${randomUUID()}`;
-}
-
-function audit(caseRecord: DemoCase, event: AuditEvent["event"], actor: AuditEvent["actor"], detail: string) {
-  caseRecord.audit.push({ at: now(), event, actor, detail });
-}
 
 server.registerTool(
   "submit_safety_report",
   {
     description:
-      "Create a synthetic SafeVoice safety report. Demo data is held in memory only. This tool does not contact regulators, clinicians, employers or emergency services.",
+      "Create a synthetic SafeVoice safety report. Demo data is held in memory only. Every report is immediately visible for human review even when evidence is incomplete. This demo does not authenticate reviewer identity or contact regulators, clinicians, employers or emergency services.",
     inputSchema: {
       sourceLanguage: z.string().min(2),
       originalStatement: z.string().min(5),
@@ -67,39 +29,8 @@ server.registerTool(
     },
   },
   async ({ sourceLanguage, originalStatement, translatedStatement }) => {
-    const evaluated = evaluateSafetyRules(`${originalStatement}\n${translatedStatement ?? ""}`);
-    const caseId = newCaseId();
-    const primaryHit = evaluated.hits[0];
-    const evidenceRequests = [...new Set(evaluated.hits.flatMap((hit) => hit.evidenceRequests))];
-
-    const caseRecord: DemoCase = {
-      caseId,
-      sourceLanguage,
-      originalStatement,
-      translatedStatement,
-      domain: evaluated.primaryDomain,
-      issueType: primaryHit?.issueType ?? "unclassified_safety_concern",
-      priority: evaluated.overallRisk,
-      status: evidenceRequests.length > 0 ? "awaiting_evidence" : "awaiting_human_review",
-      humanReviewRequired: true,
-      ruleHits: evaluated.hits,
-      evidenceRequests,
-      audit: [],
-    };
-
-    audit(caseRecord, "report_received", "reporter", "Original-language safety concern received and preserved.");
-    if (translatedStatement) {
-      audit(caseRecord, "translation_attached", "safevoice", "Translation stored as a derived artefact; original statement remains preserved.");
-    }
-    audit(
-      caseRecord,
-      "rules_evaluated",
-      "safevoice",
-      evaluated.hits.length
-        ? `Matched deterministic demo rules: ${evaluated.hits.map((hit) => hit.ruleId).join(", ")}.`
-        : "No deterministic demo rule matched; case remains queued for human review.",
-    );
-
+    const caseRecord = createDemoCase({ sourceLanguage, originalStatement, translatedStatement });
+    const caseId = caseRecord.caseId;
     demoCases.set(caseId, caseRecord);
 
     return {
@@ -184,7 +115,7 @@ server.registerTool(
   "request_human_review",
   {
     description:
-      "Move a synthetic demo case into authorised human review. This tool never approves enforcement, diagnosis, sanctions or automatic closure.",
+      "Move a synthetic demo case into review. This prototype does not authenticate reviewer identity. It never approves enforcement, diagnosis, sanctions or automatic closure.",
     inputSchema: {
       caseId: z.string().min(5),
       reason: z.string().min(3),
@@ -195,9 +126,11 @@ server.registerTool(
     if (!caseRecord) {
       return { content: [{ type: "text", text: JSON.stringify({ caseId, found: false }) }] };
     }
-    caseRecord.status = "under_review";
-    caseRecord.humanReviewRequired = true;
-    audit(caseRecord, "human_review_started", "authorised_human", reason);
+    try {
+      beginDemoHumanReview(caseRecord, reason);
+    } catch (error) {
+      return { content: [{ type: "text", text: JSON.stringify({ caseId, error: String(error) }) }] };
+    }
     return {
       content: [
         {
@@ -206,7 +139,7 @@ server.registerTool(
             {
               caseId,
               status: caseRecord.status,
-              governance: "Authorised human review has started. No high-impact action executed automatically.",
+              governance: "Demo review has started. Reviewer identity is not authenticated. No high-impact action executed automatically.",
             },
             null,
             2,
@@ -221,23 +154,24 @@ server.registerTool(
   "record_human_decision",
   {
     description:
-      "Record a synthetic authorised human decision and corrective action. The decision text is supplied by the human and is not generated or approved by this tool.",
+      "Record a synthetic demo human decision and corrective action after review begins. Reviewer identity is not authenticated. The decision text is supplied by the caller and is not generated or approved by this tool.",
     inputSchema: {
       caseId: z.string().min(5),
       decision: z.string().min(3),
       correctiveAction: z.string().min(3),
+      rationale: z.string().min(3),
     },
   },
-  async ({ caseId, decision, correctiveAction }) => {
+  async ({ caseId, decision, correctiveAction, rationale }) => {
     const caseRecord = demoCases.get(caseId);
     if (!caseRecord) {
       return { content: [{ type: "text", text: JSON.stringify({ caseId, found: false }) }] };
     }
-    caseRecord.humanDecision = decision;
-    caseRecord.correctiveAction = correctiveAction;
-    caseRecord.status = "action_recorded";
-    audit(caseRecord, "human_decision_recorded", "authorised_human", decision);
-    audit(caseRecord, "corrective_action_recorded", "authorised_human", correctiveAction);
+    try {
+      recordDemoHumanDecision(caseRecord, decision, correctiveAction, rationale);
+    } catch (error) {
+      return { content: [{ type: "text", text: JSON.stringify({ caseId, error: String(error) }) }] };
+    }
     return {
       content: [{ type: "text", text: JSON.stringify({ caseId, status: caseRecord.status }, null, 2) }],
     };
@@ -248,7 +182,7 @@ server.registerTool(
   "verify_corrective_action",
   {
     description:
-      "Record human verification of a synthetic corrective action. Verification must be provided by an authorised person.",
+      "Record caller-provided verification of a synthetic corrective action after an action is recorded. This prototype does not authenticate reviewer identity.",
     inputSchema: {
       caseId: z.string().min(5),
       verification: z.string().min(3),
@@ -259,9 +193,11 @@ server.registerTool(
     if (!caseRecord) {
       return { content: [{ type: "text", text: JSON.stringify({ caseId, found: false }) }] };
     }
-    caseRecord.verification = verification;
-    caseRecord.status = "verified";
-    audit(caseRecord, "corrective_action_verified", "authorised_human", verification);
+    try {
+      verifyDemoCorrectiveAction(caseRecord, verification);
+    } catch (error) {
+      return { content: [{ type: "text", text: JSON.stringify({ caseId, error: String(error) }) }] };
+    }
     return {
       content: [
         {
@@ -271,7 +207,7 @@ server.registerTool(
               caseId,
               status: caseRecord.status,
               verification,
-              note: "Verification is recorded as a human-provided statement in this synthetic demo.",
+              note: "Verification is recorded as a caller-provided statement in this synthetic demo; identity is not authenticated.",
             },
             null,
             2,

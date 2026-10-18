@@ -8,6 +8,8 @@ test("Yoruba expired-medicine signal maps to MED-EXP-001", () => {
   assert.equal(result.overallRisk, "high");
   assert.ok(result.hits.some((hit) => hit.ruleId === "MED-EXP-001"));
   assert.equal(result.humanReviewRequired, true);
+  assert.equal(result.ruleSignal, "deterministic_match");
+  assert.equal(result.confidence, null);
 });
 
 test("English expired-medicine signal maps to MED-EXP-001", () => {
@@ -36,4 +38,6 @@ test("unmatched reports remain under human review", () => {
   assert.equal(result.overallRisk, "medium");
   assert.equal(result.humanReviewRequired, true);
   assert.equal(result.hits.length, 0);
+  assert.equal(result.ruleSignal, "unclassified");
+  assert.equal(result.confidence, null);
 });
