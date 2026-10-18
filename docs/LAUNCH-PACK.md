@@ -1,12 +1,14 @@
 # SafeVoice Intelligence Launch Pack
 
+**Status:** draft positioning only. The current build is a local, memory-only demo for synthetic typed English and Yoruba reports. Voice, image, video, live reporting and organisational integrations are not implemented. Do not publish copy below without adapting it to the specific demo and audience.
+
 ## One-line positioning
 
 **SafeVoice Intelligence turns multilingual human safety concerns into structured, traceable action while keeping consequential decisions under authorised human control.**
 
 ## Short description
 
-SafeVoice is a multilingual safety-intelligence platform for food, medicines, healthcare, care, hospitality, workplace, product and community safety. People can report concerns in the language and format most natural to them. SafeVoice preserves the original evidence, structures the concern, supports risk-aware routing and escalation, and maintains an auditable trail through human review and verified resolution.
+SafeVoice is an early-stage project exploring how multilingual safety concerns could move into structured, traceable human review. Its current local demo handles fictional typed English and Yoruba text and demonstrates a review, action and verification timeline. It does not accept live reports or media and does not route cases to an organisation.
 
 ## Core message
 
@@ -22,11 +24,11 @@ I have started building **SafeVoice Intelligence**, a multilingual, human-govern
 
 A food worker may notice contamination. A patient may notice that a medicine looks wrong. A care worker may spot neglect. A parent may discover an unsafe product. A factory worker may see a hazard. And sometimes the person who sees the problem cannot easily explain it in the language or format a reporting system expects.
 
-SafeVoice is designed to let people begin with what they already have: their voice, their language, a photograph, a short message, or other evidence.
+The longer-term design explores letting people begin with their language and the evidence they already have. The current demo is deliberately narrower: synthetic typed text only.
 
-The platform then helps turn that signal into a structured case with provenance, risk indicators, routing, escalation, human review, corrective action and an evidence timeline.
+The current prototype turns that fictional text into a demo case with a transparent rule signal, evidence questions, human-review steps and an audit timeline. It does not route or escalate a real report.
 
-One of the first synthetic demos starts with a Yoruba medicine-safety report. The original Yoruba statement is preserved as evidence. Translation becomes a separate derived artefact rather than silently replacing the person's words.
+The local synthetic demo can start with a Yoruba medicine-safety example. It preserves the original text and stores any English rendering separately as unverified. This is a workflow test, not proof of translation quality.
 
 The governance rule is deliberate:
 

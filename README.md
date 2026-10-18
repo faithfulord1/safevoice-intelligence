@@ -2,9 +2,9 @@
 
 **Speak up. Stay protected. Get the right action.**
 
-SafeVoice Intelligence is a multilingual, human-governed safety intelligence platform for turning real-world safety concerns into structured, traceable action.
+SafeVoice Intelligence is an early-stage project for making safety reporting more accessible and keeping the path from report to human review traceable.
 
-A person can report a concern by voice, text, photo, video, QR code or assisted channel in the language that is most natural to them. SafeVoice preserves the original evidence, helps structure and classify the concern, routes it to the right workflow, starts escalation timers, supports authorised human review, and maintains an auditable evidence trail from first report to verified resolution.
+The current demo accepts fictional typed reports in English or Yoruba. Voice, photos, video, QR reporting, automated language services, secure case storage and live organisational routing are future product work and are not implemented in this version.
 
 > **AI understands. AI recommends. Humans decide. Every action is accountable.**
 

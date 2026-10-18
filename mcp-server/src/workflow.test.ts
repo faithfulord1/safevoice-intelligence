@@ -22,7 +22,6 @@ test("missing evidence stays visible but does not block immediate human review",
   beginDemoHumanReview(record, "Synthetic reviewer opens the case.");
   assert.equal(record.status, "under_review");
 });
-
 test("a decision cannot be recorded before review starts", () => {
   const record = createDemoCase({
     caseId: "SV-DEMO-TEST-2",
@@ -60,4 +59,3 @@ test("verification requires a recorded action and the timeline retains rationale
   assert.equal(record.originalStatement, "Oogun ti won fun mi yii dabi eni pe ojo re ti koja.");
   assert.equal(record.translatedStatement, "This medicine appears to be past its expiry date.");
 });
-

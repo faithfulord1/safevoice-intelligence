@@ -1,7 +1,7 @@
 # SafeVoice revival brief
 
-**Status:** working local synthetic web demo and MCP workflow; no production deployment  
-**Proposed next step:** validate the workflow and Yoruba-English wording with a qualified reviewer, then scope a secure partner-backed pilot  
+**Status:** working local synthetic web demo and MCP workflow; no production deployment
+**Proposed next step:** validate the workflow and Yoruba-English wording with a qualified reviewer, then scope a secure partner-backed pilot
 **Funding ask:** not set; costs and eligibility need a delivery partner and funder guidance
 
 ## The opportunity

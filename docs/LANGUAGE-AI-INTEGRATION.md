@@ -1,6 +1,6 @@
 # SafeVoice in Palm92's Nigeria Language AI initiative
 
-**Purpose:** connect existing Palm92 work without duplicating a general language model.  
+**Purpose:** connect existing Palm92 work without duplicating a general language model.
 **Status:** architecture and synthetic workflow only; language performance is not benchmarked.
 
 ## Three layers, one evidence path
