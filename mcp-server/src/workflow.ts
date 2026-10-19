@@ -55,9 +55,9 @@ export function createDemoCase(input: {
   originalStatement: string;
   translatedStatement?: string;
 }): DemoCase {
-  const evaluated = evaluateSafetyRules(
-    `${input.originalStatement}\n${input.translatedStatement ?? ""}`,
-  );
+  // Only the original wording can trigger deterministic rules. A human-entered
+  // translation is unverified and must not change risk signals or prioritisation.
+  const evaluated = evaluateSafetyRules(input.originalStatement);
   const evidenceRequests = [
     ...new Set(evaluated.hits.flatMap((hit) => hit.evidenceRequests)),
   ];
@@ -96,8 +96,8 @@ export function createDemoCase(input: {
     "rules_evaluated",
     "safevoice",
     evaluated.hits.length
-      ? `Matched deterministic demo rules: ${evaluated.hits.map((hit) => hit.ruleId).join(", ")}.`
-      : "No deterministic demo rule matched; case remains queued for human review.",
+      ? `Matched deterministic demo rules against original wording only: ${evaluated.hits.map((hit) => hit.ruleId).join(", ")}.`
+      : "No deterministic demo rule matched against original wording; case remains queued for human review.",
   );
   return record;
 }

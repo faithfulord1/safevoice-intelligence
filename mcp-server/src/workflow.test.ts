@@ -22,6 +22,26 @@ test("missing evidence stays visible but does not block immediate human review",
   beginDemoHumanReview(record, "Synthetic reviewer opens the case.");
   assert.equal(record.status, "under_review");
 });
+
+test("unverified translation does not affect deterministic rule signals", () => {
+  const originalOnly = createDemoCase({
+    caseId: "SV-DEMO-ORIGINAL-ONLY",
+    sourceLanguage: "yo",
+    originalStatement: "Oogun ti won fun mi yii dabi eni pe ojo re ti koja.",
+  });
+  const withTranslation = createDemoCase({
+    caseId: "SV-DEMO-WITH-TRANSLATION",
+    sourceLanguage: "yo",
+    originalStatement: "Oogun ti won fun mi yii dabi eni pe ojo re ti koja.",
+    translatedStatement: "A fictional report about a peanut allergy and a meal.",
+  });
+
+  assert.deepEqual(withTranslation.ruleHits, originalOnly.ruleHits);
+  assert.equal(withTranslation.priority, originalOnly.priority);
+  assert.equal(withTranslation.domain, originalOnly.domain);
+  assert.ok(withTranslation.audit.some((event) => event.detail.includes("original wording only")));
+});
+
 test("a decision cannot be recorded before review starts", () => {
   const record = createDemoCase({
     caseId: "SV-DEMO-TEST-2",
