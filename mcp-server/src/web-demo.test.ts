@@ -76,3 +76,34 @@ test("demo API rejects unsupported languages and oversized reports", async (t) =
   });
   assert.equal(oversized.status, 400);
 });
+
+test("demo API blocks cross-origin and non-JSON mutation requests", async (t) => {
+  const server = createDemoWebServer();
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(() => new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve())));
+  const address = server.address();
+  assert.ok(address && typeof address !== "string");
+  const url = `http://127.0.0.1:${address.port}/api/cases`;
+  const payload = JSON.stringify({ sourceLanguage: "en", originalStatement: "A fictional report text." });
+
+  const crossOrigin = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json", origin: "https://attacker.example" },
+    body: payload,
+  });
+  assert.equal(crossOrigin.status, 403);
+
+  const nonJson = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "text/plain" },
+    body: payload,
+  });
+  assert.equal(nonJson.status, 415);
+
+  const accepted = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json", origin: `http://127.0.0.1:${address.port}` },
+    body: payload,
+  });
+  assert.equal(accepted.status, 201);
+});
