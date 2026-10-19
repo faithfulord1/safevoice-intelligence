@@ -49,6 +49,26 @@ export function createDemoWebServer() {
   return createServer(async (request, response) => {
     const pathname = new URL(request.url ?? "/", "http://127.0.0.1").pathname;
     try {
+      if (request.method === "POST") {
+        const host = request.headers.host;
+        let localOrigin = false;
+        try {
+          const hostUrl = new URL(`http://${host}`);
+          localOrigin = hostUrl.hostname === "127.0.0.1" || hostUrl.hostname === "localhost";
+          const origin = request.headers.origin;
+          if (origin && new URL(origin).origin !== hostUrl.origin) localOrigin = false;
+        } catch {
+          localOrigin = false;
+        }
+        if (!localOrigin) {
+          sendJson(response, 403, { error: "ORIGIN_REJECTED", message: "Only requests from this local demo origin are accepted." });
+          return;
+        }
+        if (!/^application\/json(?:\s*;|$)/i.test(request.headers["content-type"] ?? "")) {
+          sendJson(response, 415, { error: "JSON_REQUIRED", message: "POST requests must use application/json." });
+          return;
+        }
+      }
       if (request.method === "GET" && pathname === "/") {
         const html = await readFile(htmlUrl);
         response.writeHead(200, {
