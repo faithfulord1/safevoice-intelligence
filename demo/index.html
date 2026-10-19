@@ -33,7 +33,7 @@
         <form id="report-form">
           <div class="field"><label for="language">Report language</label><select id="language" name="sourceLanguage" required><option value="yo">Yoruba</option><option value="en">English</option></select></div>
           <div class="field"><label for="original">Original report</label><textarea id="original" name="originalStatement" minlength="5" maxlength="4000" required placeholder="Enter a fictional example only"></textarea><small>Do not include personal details. This demo does not record voice or upload photos/video.</small></div>
-          <div class="field"><label for="translation">English rendering (optional)</label><textarea id="translation" name="translatedStatement" maxlength="4000" placeholder="A separate draft translation, if available"></textarea><small>Not automatically translated or independently verified.</small></div>
+          <div class="field"><label for="translation">English rendering (optional)</label><textarea id="translation" name="translatedStatement" maxlength="4000" placeholder="A separate draft translation, if available"></textarea><small>Not automatically translated or independently verified. Rule signals use the original wording only.</small></div>
           <button class="btn" id="submit-report" type="submit">Submit synthetic report</button>
         </form>
         <div id="form-message" role="status" aria-live="polite"></div>
